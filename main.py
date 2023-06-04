@@ -16,22 +16,15 @@ stereo = cv2.StereoBM_create(numDisparities = 16,
 							blockSize = 15)
 
 # computes disparity
-disparity = stereo.compute(imgL, imgR2)
-print(type(disparity))
+disparity = stereo.compute(imgL, imgR2)/16 #convert to real floatng point nums
+
+
+
 # displays image as grayscale and plotted
 plt.imshow(disparity, 'gray')
 plt.show()
 
-disparity_i_j = []
-for i in range(len(disparity)):
-    for j in disparity[i]:
-        if disparity[i, j] not in disparity_i_j:
-            disparity_i_j.append(disparity[i, j])
-disparity_i_j.sort()
-print(disparity_i_j)
-for i in range(disparity_i_j[0], disparity_i_j[-1], 1):
-    if i not in disparity_i_j:
-        print(i, end=', ')
+
 
 
 #depth = baseline (in mm) * focal length (in mm)/ disparity (in pixels)
