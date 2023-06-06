@@ -1,3 +1,5 @@
+#testing code, do not use for production purposes
+
 import numpy as np
 import cv2
 imgR = cv2.imread('right_img.png', 0)
