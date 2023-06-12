@@ -9,8 +9,8 @@ from matplotlib import pyplot as plt
 """
 The focal length of both cameras have to be the same
 """
-baseline = 0 #abs distance between two cameras (Changed based on scenerio)
-focal_length = 0 #The focal length of cameras (Changed based on scenerio)
+baseline = None #abs distance between two cameras (Changed based on scenerio)
+focal_length = None #The focal length of cameras (Changed based on scenerio)
 
 
 
