@@ -1,5 +1,6 @@
 # import OpenCV and pyplot
 import cv2
+import numpy as np
 from matplotlib import pyplot as plt
 
 #Cv2 documentation: https://docs.opencv.org/3.4/dd/d53/tutorial_py_depthmap.html
@@ -50,13 +51,14 @@ stereo = cv2.StereoBM_create(numDisparities = 16,
 							blockSize = 15)
 
 # computes disparity
-disparity = stereo.compute(imgL, imgR2)/16 #convert to real floatng point nums by divide the result with 16
+disparity = stereo.compute(imgL, imgR2).astype(np.float32)/16 #convert to real floatng point nums by divide the result with 16
 
 
 
 
 # displays image as grayscale and plotted using Matplotlib
-plt.imshow(disparity, 'gray')
+#plt.imshow(disparity, 'gray')
+plt.imshow(disparity)
 plt.show()
 
 
