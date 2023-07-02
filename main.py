@@ -9,9 +9,9 @@ from matplotlib import pyplot as plt
 """
 The focal length of both cameras have to be the same
 """
-baseline = None #abs distance between two cameras (Changed based on scenerio)
-focal_length = None #The focal length of cameras (Changed based on scenerio)
-
+baseline = 0.06 #abs distance between two cameras(Changed based on scenerio, unit in "meters")
+focal_length = 25 #The focal length of cameras(Changed based on scenerio, unit in "pixels")
+actual_distance = None #The actual distance of the object(final result, unit in "meters")
 
 
 """
@@ -34,12 +34,12 @@ cv2.imwrite("right_img.png", frame_R)
 # read left and right images (source method 2)
 # using example image right here
 imgR = cv2.imread('right_img.png', 0)
-print(imgR.shape[:2])
+#print(imgR.shape[:2])
 imgR2 = imgR[0:3000, 0:3976] #convert images to same size
-print(imgR2.shape[:2])
+#print(imgR2.shape[:2])
 imgL = cv2.imread('left_img.png', 0)
-print(imgL.shape[:2])
-
+#print(imgL.shape[:2])
+#print(imgL.shape == imgR.shape)
 
 
 
@@ -54,13 +54,55 @@ disparity = stereo.compute(imgL, imgR2)/16 #convert to real floatng point nums b
 
 
 
+
 # displays image as grayscale and plotted using Matplotlib
 plt.imshow(disparity, 'gray')
 plt.show()
 
 
-try:
-    depth = baseline * focal_length / disparity
-    print("depth =" + depth)
-except TypeError:
-    print("Invalid value type for either baseling of focal_length, has to be int")
+
+
+
+lst = []
+
+possible_disparity_key = []
+possible_disparity_value = []
+for i in disparity:
+    for j in i:
+        if float(j) not in possible_disparity_key:
+            possible_disparity_key.append(float(j))
+            possible_disparity_value.append(1)
+        else:
+            possible_disparity_value[possible_disparity_key.index(float(j))] += 1
+
+
+
+
+print(possible_disparity_key.index(-1.0))
+print(possible_disparity_key.index(0.0))
+possible_disparity_value.pop(possible_disparity_key.index(-1.0))
+possible_disparity_key.remove(-1.0)
+possible_disparity_value.pop(possible_disparity_key.index(0.0))
+possible_disparity_key.remove(0.0)
+
+
+
+print("possible_disparity_key = " + str(possible_disparity_key))
+print("possible_disparity_value = " + str(possible_disparity_value))
+
+
+p_d_v_max = max(possible_disparity_value)
+p_d_k_max = possible_disparity_key[possible_disparity_value.index(p_d_v_max)]
+
+print("p_d_v_max = " + str(p_d_v_max))
+print("p_d_k_max = " + str(p_d_k_max))
+
+
+
+
+
+
+
+depth = baseline * focal_length / p_d_k_max
+
+print(depth)
