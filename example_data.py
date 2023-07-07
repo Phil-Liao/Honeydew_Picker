@@ -238,7 +238,7 @@ for i in lst:
         max_val = max(lst2)
         max_val_loc = lst.index(i)
 print(lst2)
-print(lst[max_val_loc][0])
+print(lst[max_val_loc][1])
 b = 0.06
 f = 25
 z = b * f / lst[max_val_loc][0]

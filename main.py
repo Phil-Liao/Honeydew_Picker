@@ -57,15 +57,13 @@ disparity = stereo.compute(imgL, imgR2).astype(np.float32)/16 #convert to real f
 
 
 # displays image as grayscale and plotted using Matplotlib
-#plt.imshow(disparity, 'gray')
-plt.imshow(disparity)
+plt.imshow(disparity, 'gray')
 plt.show()
 
 
 
 
 
-lst = []
 
 possible_disparity_key = []
 possible_disparity_value = []
