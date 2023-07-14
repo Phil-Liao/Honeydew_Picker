@@ -1,5 +1,5 @@
 #Documentation: https://www.cs.cmu.edu/~16385/s17/Slides/13.2_Stereo_Matching.pdf
-
+#Data just for testing
 lst = [
     [0.5, 319],
     [0.5625, 5680],
@@ -230,7 +230,7 @@ lst = [
     ]
 
 lst2 = []
-
+"""
 for i in lst:
     lst2.append(i[1])
     #print(i[1])
@@ -243,5 +243,26 @@ b = 0.06
 f = 25
 z = b * f / lst[max_val_loc][0]
 print(z)
+"""
 
+import production
+import cv2
+import numpy as np
+imgR = cv2.imread('right_img.png', 0)
+imgL = cv2.imread('left_img.png', 0)
+
+img_r = production.image(25, imgR, 0)
+img_l = production.image(25, imgL, 0)
+
+img_r.img_crop(0, 3000, 0, 3976) #convert images to same size
+print(img_r.get_img_info())
+
+num_disparities = 16
+block_size = 15
+
+p_d_k_max = production.disparity_computing(img_l, img_r, num_disparities, block_size)
+print(p_d_k_max)
+
+depth = production.get_actual_depth(0.06, 25, p_d_k_max)
+print(depth)
 

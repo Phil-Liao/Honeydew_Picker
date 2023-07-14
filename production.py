@@ -3,6 +3,12 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
+
+#Cv2 documentation: https://docs.opencv.org/3.4/dd/d53/tutorial_py_depthmap.html
+#Youtube explanation video: https://youtu.be/hUVyDabn1Mg
+
+#depth = baseline (in mm) * focal length (in mm)/ disparity (in pixels)
+
 class image:
     def __init__(self, camera_focal_length:float, img:np.array, img_type:int) -> None:
         self.camera_focal_length = camera_focal_length
@@ -88,21 +94,3 @@ def get_actual_depth(baseline:float, focal_length:float, most_possible_disparity
 
 
 
-
-imgR = cv2.imread('right_img.png', 0)
-imgL = cv2.imread('left_img.png', 0)
-
-img_r = image(25, imgR, 0)
-img_l = image(25, imgL, 0)
-
-img_r.img_crop(0, 3000, 0, 3976) #convert images to same size
-print(img_r.get_img_info())
-
-num_disparities = 16
-block_size = 15
-
-p_d_k_max = disparity_computing(img_l, img_r, num_disparities, block_size)
-print(p_d_k_max)
-
-depth = get_actual_depth(0.06, 25, p_d_k_max)
-print(depth)
