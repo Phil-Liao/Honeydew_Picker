@@ -9,7 +9,7 @@ urllib.request.urlretrieve(url, filename)
 
 
 # input
-img = cv2.imread('/Users/philliao/Documents/Honeydew_Picker/Assets/test_img_25.jpeg')
+img = cv2.imread('/Users/philliao/Documents/Honeydew_Picker/Assets/test_img_full.jpeg')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) / 255.0
 
 img_resized = tf.image.resize(img, [256,256], method='bicubic', preserve_aspect_ratio=False)
