@@ -1,14 +1,15 @@
 import cv2
 import tensorflow as tf
-import urllib.request
 import matplotlib.pyplot as plt
-import time
+"""
+import urllib.request
+url, filename = ("https://github.com/intel-isl/MiDaS/releases/download/v2_1/model_opt.tflite", "model_opt.tflite")
+urllib.request.urlretrieve(url, filename)
+"""
 
-#url, filename = ("https://github.com/intel-isl/MiDaS/releases/download/v2_1/model_opt.tflite", "model_opt.tflite")
-#urllib.request.urlretrieve(url, filename)
 
 # input
-img = cv2.imread('/Users/philliao/Documents/Honeydew_Picker/Assets/test_img_15.jpeg')
+img = cv2.imread('/Users/philliao/Documents/Honeydew_Picker/Assets/test_img_25.jpeg')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) / 255.0
 
 img_resized = tf.image.resize(img, [256,256], method='bicubic', preserve_aspect_ratio=False)

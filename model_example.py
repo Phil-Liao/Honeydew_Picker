@@ -6,7 +6,6 @@ import tensorflow as tf
 import tensorflow_hub as hub
 
 
-
 # the runtime initialization will not allocate all memory on the device to avoid out of GPU memory
 gpus = tf.config.experimental.list_physical_devices('GPU')
 for gpu in gpus:
@@ -15,7 +14,7 @@ for gpu in gpus:
      [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=4000)])
 
 # input
-img = cv2.imread('/Users/philliao/Documents/Honeydew_Picker/Assets/test_img_1.jpeg')
+img = cv2.imread('/Users/philliao/Documents/Honeydew_Picker/Assets/test_img_5.jpeg')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) / 255.0
 
 img_resized = tf.image.resize(img, [256,256], method='bicubic', preserve_aspect_ratio=False)
@@ -35,8 +34,7 @@ prediction = cv2.resize(prediction, (img.shape[1], img.shape[0]), interpolation=
 print(" Write image to: output.png")
 depth_min = prediction.min()
 depth_max = prediction.max()
-print("depth_min =", str(depth_min))
-print("depth_max =", str(depth_max))
+
 img_out = (255 * (prediction - depth_min) / (depth_max - depth_min)).astype("uint8")
 
 cv2.imwrite("output.png", img_out)
