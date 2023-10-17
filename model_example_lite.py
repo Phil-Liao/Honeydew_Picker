@@ -9,8 +9,11 @@ urllib.request.urlretrieve(url, filename)
 
 
 # input
-img = cv2.imread('Honeydew_Picker/Assets/Calibration/test_img_24.jpeg')
+img = cv2.imread('/Users/philliao/Documents/Research_Projects/IMG_0419.JPG')
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) / 255.0
+
+
+
 
 img_resized = tf.image.resize(img, [256,256], method='bicubic', preserve_aspect_ratio=False)
 #img_resized = tf.transpose(img_resized, [2, 0, 1])
@@ -36,12 +39,11 @@ output = output.reshape(256, 256)
 
 # output file
 prediction = cv2.resize(output, (img.shape[1], img.shape[0]), interpolation=cv2.INTER_CUBIC)
-print(" Write image to: output.png")
+#print(" Write image to: output.png")
 depth_min = prediction.min()
 depth_max = prediction.max()
 img_out = (255 * (prediction - depth_min) / (depth_max - depth_min)).astype("uint8")
 
-cv2.imwrite("output.png", img_out)
+#cv2.imwrite("output.png", img_out)
 plt.imshow(img_out)
-print(img_out[235:665, 670:900][0])
 plt.show()

@@ -4,7 +4,7 @@ import numpy as np
 #Cv2 documentation: https://docs.opencv.org/3.4/dd/d53/tutorial_py_depthmap.html
 #Youtube explanation video: https://youtu.be/hUVyDabn1Mg
 
-#depth = baseline (in mm) * focal length (in mm)/ disparity (in pixels)
+#depth = baseline (in mm) * focal length (in px)/ disparity (in pixels)
 
 class image:
     def __init__(self, camera_focal_length:float, img:np.array, img_type:int) -> None:

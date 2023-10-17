@@ -6,7 +6,7 @@ from matplotlib import pyplot as plt
 #Cv2 documentation: https://docs.opencv.org/3.4/dd/d53/tutorial_py_depthmap.html
 #Youtube explanation video: https://youtu.be/hUVyDabn1Mg
 
-#depth = baseline (in mm) * focal length (in mm)/ disparity (in pixels)
+#depth (in cm) = baseline (in mm) * focal length (in px)/ disparity (in pixels)
 """
 The focal length of both cameras have to be the same
 """
@@ -34,11 +34,11 @@ cv2.imwrite("right_img.png", frame_R)
 
 # read left and right images (source method 2)
 # using example image right here
-imgR = cv2.imread('Assets/right_img.png', 0)
+imgR = cv2.imread('/Users/philliao/Documents/Research_Projects/Honeydew_Picker/Assets/right_img.png', 0)
 #print(imgR.shape[:2])
 imgR2 = imgR[0:3000, 0:3976] #convert images to same size
 #print(imgR2.shape[:2])
-imgL = cv2.imread('Assets/left_img.png', 0)
+imgL = cv2.imread('/Users/philliao/Documents/Research_Projects/Honeydew_Picker/Assets/left_img.png', 0)
 #print(imgL.shape[:2])
 #print(imgL.shape == imgR.shape)
 
