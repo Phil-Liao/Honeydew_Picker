@@ -18,7 +18,7 @@ transform = transforms.small_transform
 
 #hook into OpenCV
 
-cap = cv2.VideoCapture()
+cap = cv2.VideoCapture(1)
 while cap.isOpened:
     ret, frame = cap.read()
     #Transform input for midas
