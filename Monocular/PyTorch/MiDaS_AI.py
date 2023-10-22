@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
-
 # Download the MiDaS
 midas = torch.hub.load('intel-isl/MiDaS', 'MiDaS_small')
 midas.to('cpu')
